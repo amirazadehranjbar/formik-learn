@@ -12,7 +12,6 @@ Here is a screenshot of the form implemented in this application:
 
 <img alt="App Screenshot" height="500" src="img.png" title="screenshot of form"/>
 
-*(Note: To add a real image, take a screenshot of your running application, add it to your project repository, and replace the placeholder link above with the path to your image.)*
 
 ---
 
