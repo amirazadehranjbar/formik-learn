@@ -1,13 +1,21 @@
-import {FastField} from "formik";
+import {ErrorMessage, FastField} from "formik";
 
 const FormikCheckBox = ({label, name, checkboxOptions}) => (
     <div>
         <label>{label}</label>
         <FastField name={name}>
             {({field}) => (
-                <ul className="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+
+
+                <ul className="text-sm font-medium text-gray-900 bg-white   rounded-md grid-cols-4 grid gap-2">
+
+
+
                     {checkboxOptions.map((option, index) => (
-                        <li key={index} className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+
+                        <li key={index} className="w-full border border-gray-600 rounded-md ">
+
+
                             <div className="flex items-center ps-3">
                                 <input
                                     id={option.value}
@@ -31,7 +39,7 @@ const FormikCheckBox = ({label, name, checkboxOptions}) => (
                                     }}
                                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2"
                                 />
-                                <label className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                <label className="w-full py-1 ms-2 text-sm font-medium text-gray-900 "
                                        htmlFor={option.value}>
                                     {option.value}
                                 </label>
@@ -41,6 +49,7 @@ const FormikCheckBox = ({label, name, checkboxOptions}) => (
                 </ul>
             )}
         </FastField>
+        <ErrorMessage name={name} component="p" className="text-red-500"/>
     </div>
 );
 

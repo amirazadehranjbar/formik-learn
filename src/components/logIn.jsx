@@ -11,24 +11,39 @@ const LogIn = () => {
 
     const initialValues = {
         name: "",
+        email:"",
+        phone:"",
+        verify:"email",
         address: {
             city: "",
             postalCode: ""
         },
         favorits: ["add", "sss"],
         country: "US",
-        gender:"mail",
-        skills:[""],
+        gender: "mail",
+        skills: [],
     };
 
     const validationSchema = yup.object({
         name: yup.string().required("name is required...!"),
-        // password: yup.string().required("password is required...!").min(8, "password must be more than 8 characters"),
+        password: yup.string().required("password is required...!").min(8, "password must be more than 8 characters"),
+        email: yup.string().when('verify', {
+        is: 'email',
+        then:()=> yup.string().email().required('email is required'),
+        otherwise:()=> yup.string().email().notRequired()}),
+
+        phone: yup.string().when('verify', {
+            is: 'phone',
+            then:()=> yup.string().required('phone is required'),
+            otherwise:()=> yup.string().notRequired()}),
+
+
         address: yup.object({
             city: yup.string().required("city name is required...!"),
             postalCode: yup.string().required("postalCode is required...!"),
         }),
         favorits: yup.array().of(yup.string().required("required"))
+
     });
 
 
@@ -38,7 +53,7 @@ const LogIn = () => {
         setTimeout(
             () => {
                 submitProps.setSubmitting(false);
-                submitProps.resetForm();
+                // submitProps.resetForm();
             }
             , 5000)
     };
@@ -90,17 +105,21 @@ const LogIn = () => {
     ];
 
     const genderOptions = [
-        {
-            value:"mail"
-        },
+        {value: "mail"},
         {value: "femail"}
     ]
 
     const skillOptions = [
-        {value:"react"},
-        {value:"matlab"},
-        {value:"R"},
-        {value:"flutter"},
+        {value: "react"},
+        {value: "matlab"},
+        {value: "R"},
+        {value: "flutter"},
+        {value: "minitab"},
+    ]
+
+    const verifyOptions = [
+        {value: "email"},
+        {value: "phone"},
     ]
 
 
@@ -113,14 +132,16 @@ const LogIn = () => {
 
                         <FormikComponent name="name" placeholder="amir" id="name" type="text" label="name"/>
 
-                        <FormikComponent type="textarea" name="bio" placeholder="write your bio here" id="bio" label="bio"/>
+                        <FormikComponent type="textarea" name="bio" placeholder="write your bio here" id="bio"
+                                         label="bio"/>
 
                         <FormikComponent type="select" id="country" name="country" label="country" options={options}/>
 
                         <FormikComponent type="radio" id="gender" name="gender" label="gender"
-                        options={genderOptions}/>
+                                         options={genderOptions}/>
 
-                        <FormikComponent type="checkbox" name="skills" id="skills" options={skillOptions} label="skills"/>
+                        <FormikComponent type="checkbox" name="skills" id="skills" options={skillOptions}
+                                         label="skills"/>
 
                         {/*region password*/}
                         <div className="mt-2">
@@ -171,6 +192,19 @@ const LogIn = () => {
                         </div>
                         {/*endregion*/}
 
+                        {/*region verify*/}
+                        <div className="flex justify-around items-center">
+                            <FormikComponent name="verify"
+                                             id="verify" type="radio" label="select verify method"
+                                             options={verifyOptions}/>
+                            {
+                                formik.values.verify === "email"
+                                    ? (<FormikComponent name="email" label="email" type="text" placeholder="example@gmail.com"/>)
+                                    :(<FormikComponent name="phone" label="phone" type="text" placeholder="091*******"/>)
+                            }
+                        </div>
+                        {/*endregion*/}
+
 
                         {/*region buttons*/}
                         <button type="submit"
@@ -205,7 +239,7 @@ const LogIn = () => {
                                 load saved data
                             </button>
                         )}
-                       {/*endregion*/}
+                        {/*endregion*/}
 
 
                     </div>
