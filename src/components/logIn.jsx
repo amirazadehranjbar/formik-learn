@@ -1,10 +1,11 @@
 import {ErrorMessage, FastField, FieldArray, Form, Formik} from "formik";
 import * as yup from "yup";
 import FavoritsFieldArray from "./FavoritsFieldArray.jsx";
-import {Plus} from "lucide-react";
 import FormikComponent from "./formikComponent/FormikComponent.jsx";
-import FormikTextArea from "./formikComponent/FormikTextArea.jsx";
-import FormikSelectBox from "./formikComponent/FormikSelectBox.jsx";
+import "react-datepicker/dist/react-datepicker.css";
+import FormikDatePicker from "./formikComponent/FormikDatePicker.jsx";
+
+
 
 const LogIn = () => {
 
@@ -22,6 +23,11 @@ const LogIn = () => {
         country: "US",
         gender: "mail",
         skills: [],
+        birthday:{
+            year:"",
+            month:"",
+            day:""
+        },
     };
 
     const validationSchema = yup.object({
@@ -48,6 +54,15 @@ const LogIn = () => {
 
 
     const onSubmit = (values, submitProps) => {
+
+        // Combine year, month, day into a Date object
+        const { year, month, day } = values.birthday;
+        const birthdayDate = new Date(year, month, day); // month is 0-indexed
+
+        // Optionally, add to values or send separately
+        values.birthdayDate = birthdayDate;
+
+        console.log("Birthday as Date:", birthdayDate);
         console.log(values);
 
         setTimeout(
@@ -121,6 +136,7 @@ const LogIn = () => {
         {value: "email"},
         {value: "phone"},
     ]
+
 
 
     return (
@@ -203,6 +219,10 @@ const LogIn = () => {
                                     :(<FormikComponent name="phone" label="phone" type="text" placeholder="091*******"/>)
                             }
                         </div>
+                        {/*endregion*/}
+
+                        {/*region datepicker*/}
+                        <FormikDatePicker label="birthday" name="birthday"/>
                         {/*endregion*/}
 
 

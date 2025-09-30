@@ -1,13 +1,18 @@
 @import "tailwindcss";
 
-.my-button{
+.my-button {
     @apply text-white bg-blue-700 hover:bg-blue-800
     hover:outline-2 hover:outline-blue-400 hover:outline-offset-2 active:outline-blue-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 cursor-pointer mt-2
     disabled:bg-slate-600 disabled:cursor-not-allowed
 
 }
 
-.my-input{
+.my-input {
     @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
 
+}
+
+.date-select {
+    @apply
+    bg-gray-700 border-2 border-gray-400 text-gray-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2 text-center
 }
