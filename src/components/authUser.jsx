@@ -48,6 +48,7 @@ const AuthUser = () => {
                         <FormikComponent name="userName" placeholder="amir" type="text" label="user Name"/>
                         <FormikComponent name="firstName" placeholder="amir" type="text" label="first Name"/>
                         <FormikComponent name="lastName" placeholder="amir" type="text" label="last Name"/>
+                        <FormikComponent name="email" placeholder="email" type="text" label="email"/>
 
 
                         {/*region password*/}
